@@ -8,32 +8,25 @@ on:
     
   # 2. Chạy khi có Pull Request được mở, đồng bộ (sync), hoặc mở lại (reopened)
   pull_request:
-    types: [opened, synchronize, reopened] 
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
     name: Analyze on SonarCloud
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0  # Cần thiết để SonarCloud phân tích lịch sử commit
           
-      - name: SonarCloud Scan (Cập Nhật Cú Pháp)
-        uses: SonarSource/sonarqube-scan-action@master # HOẶC @v5.0.0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-          
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Sửa: Truyền các thuộc tính vào trường 'args'
           args: >
-            -Dsonar.projectKey=your_sonarcloud_project_key
-            -Dsonar.organization=your_sonarcloud_organization_id
-            -Dsonar.host.url=https://sonarcloud.io 
-            # Thêm các tham số khác nếu cần, ví dụ: ngôn ngữ, độ bao phủ...
-          # Thay thế bằng ID dự án SonarCloud của bạn
-          # Ví dụ: 'ten-to-chuc_ten-du-an'
-          projectKey: "Twangggg_JoyLeeMarket"
-          # Thay thế bằng ID tổ chức SonarCloud của bạn
-          organization: "twangggg"
+            -Dsonar.projectKey=Twangggg_JoyLeeMarket
+            -Dsonar.organization=twangggg
+            -Dsonar.host.url=https://sonarcloud.io
