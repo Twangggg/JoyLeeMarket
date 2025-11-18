@@ -1,6 +1,14 @@
 # .github/workflows/sonar-analysis.yml
 name: SonarCloud Analysis
-# ... (các phần on: và jobs: giữ nguyên)
+
+on:
+  # 1. Chạy khi có code được đẩy (push) lên nhánh chính
+  push:
+    branches: [ main ] # Hoặc master, tùy theo tên nhánh chính của bạn
+    
+  # 2. Chạy khi có Pull Request được mở, đồng bộ (sync), hoặc mở lại (reopened)
+  pull_request:
+    types: [opened, synchronize, reopened] 
 
 jobs:
   build:
