@@ -2,9 +2,8 @@
 name: SonarCloud Analysis
 
 on:
-  # 1. Chạy khi có code được đẩy (push) lên nhánh chính
   push:
-    branches: [main] # Hoặc master, tùy theo tên nhánh chính của bạn
+    branches: [main]
 
   # 2. Chạy khi có Pull Request được mở, đồng bộ (sync), hoặc mở lại (reopened)
   pull_request:
