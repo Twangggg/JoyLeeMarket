@@ -4,8 +4,8 @@ name: SonarCloud Analysis
 on:
   # 1. Chạy khi có code được đẩy (push) lên nhánh chính
   push:
-    branches: [ main ] # Hoặc master, tùy theo tên nhánh chính của bạn
-    
+    branches: [main] # Hoặc master, tùy theo tên nhánh chính của bạn
+
   # 2. Chạy khi có Pull Request được mở, đồng bộ (sync), hoặc mở lại (reopened)
   pull_request:
     types: [opened, synchronize, reopened]
@@ -14,12 +14,12 @@ jobs:
   build:
     name: Analyze on SonarCloud
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Cần thiết để SonarCloud phân tích lịch sử commit
-          
+          fetch-depth: 0
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
