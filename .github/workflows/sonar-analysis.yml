@@ -1,0 +1,32 @@
+# .github/workflows/sonar-analysis.yml
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches: [main] # Chạy khi có code được đẩy lên nhánh main
+  pull_request:
+    types: [opened, synchronize, reopened] # Chạy khi tạo hoặc cập nhật Pull Request
+
+jobs:
+  build:
+    name: Analyze on SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Cần fetch lịch sử đầy đủ cho phân tích chính xác
+          fetch-depth: 0
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          # Biến này đã được tạo trong GitHub Secrets
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # Biến này được GitHub cung cấp tự động để cho phép PR Decoration
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Thay thế bằng ID dự án SonarCloud của bạn
+          # Ví dụ: 'ten-to-chuc_ten-du-an'
+          projectKey: "Twangggg_JoyLeeMarket"
+          # Thay thế bằng ID tổ chức SonarCloud của bạn
+          organization: "twangggg"
