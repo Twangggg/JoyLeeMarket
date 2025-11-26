@@ -3,11 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import authRoute from './routers/authRoute.js';
+import requireAuth from './middlewares/authMiddleware.js';
 
 dotenv.config();
 
 // 1. Import kết nối Supabase
-import supabase from './config/supabaseClient.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,12 +16,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/test', (req, res) => res.send('test api thành công'));
 
 // Public routes
 app.use('/api/auth', authRoute);
 
 // Private routes
+app.use(requireAuth)
+app.get('/test', (req, res) => res.send('test api thành côngádasdasdasdsdfsdfsf'));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
