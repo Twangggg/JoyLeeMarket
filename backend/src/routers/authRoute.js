@@ -1,18 +1,19 @@
 import express from "express";
 import {
   refreshToken,
-  signIn,
-  signOut,
-  signUp,
+  logIn,
+  logOut,
+  register,
 } from "../controllers/authController.js";
+import requireAuth from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/signup", signUp);
+router.post("/register", register);
 
-router.post("/signin", signIn);
+router.post("/login", logIn);
 
-router.post("/signout", signOut);
+router.post("/logout", logOut);
 
 router.post("/refresh", refreshToken);
 
